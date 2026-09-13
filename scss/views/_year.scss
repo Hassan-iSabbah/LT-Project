@@ -1,0 +1,179 @@
+// /scss/_year.scss
+// ============================================================
+// YEAR VIEW — 4-column grid of months with event density
+// ============================================================
+
+.year-view {
+    .year-header {
+        text-align: center;
+        padding: 12px 0;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: $text-primary;
+        border-bottom: 2px solid $border-color;
+        background: $bg-surface-2;
+    }
+    
+    .year-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        gap: 12px;
+        padding: 16px;
+        background: $bg-body;
+        border-radius: 0 0 $radius $radius;
+        
+        .year-month-card {
+            background: $bg-surface;
+            border: 1px solid $border-color;
+            border-radius: $radius-sm;
+            padding: 12px 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            
+            &:hover {
+                background: $bg-hover;
+                border-color: $text-muted;
+                transform: translateY(-2px);
+                box-shadow: $shadow-md;
+            }
+            
+            .month-name {
+                font-size: 0.85rem;
+                font-weight: 600;
+                color: $text-primary;
+                text-align: center;
+                margin-bottom: 4px;
+            }
+            
+            .month-year {
+                font-size: 0.65rem;
+                color: $text-muted;
+                text-align: center;
+                margin-bottom: 8px;
+            }
+            
+            .month-stats {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 4px;
+                
+                .event-dots {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    gap: 2px;
+                    
+                    .dot {
+                        width: 8px;
+                        height: 8px;
+                        border-radius: 50%;
+                        background: $border-color;
+                        transition: all 0.15s;
+                        
+                        &.has-event {
+                            background: $color-work;
+                            box-shadow: 0 0 6px rgba($color-work, 0.3);
+                        }
+                        
+                        &.has-clash {
+                            background: $color-health;
+                            box-shadow: 0 0 8px rgba($color-health, 0.4);
+                        }
+                    }
+                }
+                
+                .event-count {
+                    font-size: 0.65rem;
+                    color: $text-muted;
+                    font-weight: 500;
+                    
+                    strong {
+                        color: $text-primary;
+                    }
+                }
+                
+                .month-preview {
+                    font-size: 0.55rem;
+                    color: $text-muted;
+                    text-align: center;
+                    max-width: 100%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    margin-top: 4px;
+                    padding-top: 4px;
+                    border-top: 1px solid $border-color;
+                    width: 100%;
+                    
+                    .preview-event {
+                        display: inline-block;
+                        padding: 0 4px;
+                        border-left: 2px solid $color-work;
+                        margin: 0 2px;
+                        font-size: 0.5rem;
+                        color: $text-secondary;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Responsive: Year View
+@media (max-width: 992px) {
+    .year-view .year-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .year-view .year-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        padding: 12px;
+        
+        .year-month-card {
+            padding: 8px;
+            
+            .month-name {
+                font-size: 0.75rem;
+            }
+            .month-stats .event-dots .dot {
+                width: 6px;
+                height: 6px;
+            }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .year-view .year-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+        padding: 8px;
+        
+        .year-month-card {
+            padding: 6px;
+            
+            .month-name {
+                font-size: 0.65rem;
+            }
+            .month-year {
+                font-size: 0.5rem;
+            }
+            .month-stats {
+                .event-dots .dot {
+                    width: 5px;
+                    height: 5px;
+                }
+                .event-count {
+                    font-size: 0.55rem;
+                }
+                .month-preview {
+                    display: none;
+                }
+            }
+        }
+    }
+}

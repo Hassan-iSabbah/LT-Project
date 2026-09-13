@@ -1,0 +1,60 @@
+// /scss/_mixins.scss
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin flex-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@mixin card {
+    background: $bg-surface;
+    border-radius: $radius;
+    box-shadow: $shadow-sm;
+    padding: 16px;
+    border: 1px solid $border-color;
+}
+
+@mixin ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@mixin neon-glow($color, $glow) {
+    border-left: 3px solid $color;
+    background: rgba($color, 0.08);
+    box-shadow: $glow;
+    transition: box-shadow 0.2s, transform 0.15s;
+    &:hover {
+        box-shadow: $glow, 0 0 24px rgba($color, 0.15);
+        transform: translateY(-1px);
+    }
+}
+
+@mixin respond-to($breakpoint) {
+    @media (min-width: $breakpoint) {
+        @content;
+    }
+}
+
+@mixin scrollbar-dark {
+    &::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+    &::-webkit-scrollbar-track {
+        background: $bg-body;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: $border-color;
+        border-radius: 10px;
+        &:hover {
+            background: $text-muted;
+        }
+    }
+}

@@ -1,0 +1,175 @@
+// /scss/_sync-bar.scss
+// ============================================================
+// SYNC BAR — Visual Progress Indicator (10 ticks)
+// ============================================================
+
+$sync-bar-height: 16px;
+$sync-tick-width: 3px;
+$sync-tick-gap: 2px;
+$sync-tick-long-height: 12px;
+$sync-tick-short-height: 7px;
+$sync-tick-radius: 1px;
+
+// Colors
+$sync-long-color: #00ffcc;
+$sync-long-dim: #00ccaa;
+$sync-short-color: #555;
+$sync-short-dim: #333;
+$sync-label-color: #8899aa;
+$sync-placeholder-color: #2a2a2a;
+
+// ============================================================
+// SYNC CONTAINER
+// ============================================================
+
+.sync-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: 6px;
+    font-family: 'Courier New', monospace;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 0 6px;
+    border-radius: 4px;
+    height: 18px;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.sync-label {
+    font-size: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: $sync-label-color;
+    opacity: 0.6;
+}
+
+.sync-bar {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: $sync-tick-gap;
+    height: $sync-bar-height;
+}
+
+// ============================================================
+// TICK STYLES
+// ============================================================
+
+.sync-tick {
+    display: inline-block;
+    width: $sync-tick-width;
+    border-radius: $sync-tick-radius;
+    transition: all 0.3s ease;
+
+    // --- Long tick (good sync) ---
+    &.long {
+        height: $sync-tick-long-height;
+        background: $sync-long-color;
+        box-shadow: 0 0 6px rgba($sync-long-color, 0.4);
+
+        &:hover {
+            box-shadow: 0 0 12px rgba($sync-long-color, 0.8);
+        }
+    }
+
+    // --- Short tick (poor sync) ---
+    &.short {
+        height: $sync-tick-short-height;
+        background: $sync-short-color;
+        opacity: 0.5;
+        box-shadow: 0 0 2px rgba(255, 50, 50, 0.1);
+    }
+
+    // ============================================================
+    // PLACEHOLDER TICK (No sync data yet)
+    // ============================================================
+
+    &.placeholder {
+        height: 6px;
+        width: 3px;
+        background: $sync-placeholder-color;
+        border-radius: 1px;
+        opacity: 0.4;
+        transition: all 0.3s ease;
+
+        // Slight pulse animation to draw attention
+        animation: pulse-placeholder 2s ease-in-out infinite;
+    }
+}
+
+// ============================================================
+// PLACEHOLDER ANIMATION
+// ============================================================
+
+@keyframes pulse-placeholder {
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: scaleY(1);
+    }
+    50% {
+        opacity: 0.6;
+        transform: scaleY(1.2);
+    }
+}
+
+// ============================================================
+// RESPONSIVE
+// ============================================================
+
+@media (max-width: 768px) {
+    .sync-container {
+        height: 14px;
+        padding: 0 4px;
+        gap: 3px;
+    }
+
+    .sync-label {
+        font-size: 6px;
+    }
+
+    .sync-tick {
+        width: 2px;
+
+        &.long {
+            height: 9px;
+        }
+        &.short {
+            height: 5px;
+        }
+        &.placeholder {
+            height: 4px;
+            width: 2px;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .sync-container {
+        height: 12px;
+        padding: 0 3px;
+        gap: 2px;
+        margin-left: 3px;
+    }
+
+    .sync-label {
+        font-size: 5px;
+        display: none;
+    }
+
+    .sync-tick {
+        width: 2px;
+
+        &.long {
+            height: 7px;
+        }
+        &.short {
+            height: 4px;
+        }
+        &.placeholder {
+            height: 3px;
+            width: 2px;
+        }
+    }
+}

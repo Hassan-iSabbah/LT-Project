@@ -1,0 +1,278 @@
+// /scss/_hour.scss
+// ============================================================
+// HOUR VIEW — Single hour, all events with full details
+// ============================================================
+
+.hour-view {
+    .hour-view-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 20px;
+        background: $bg-surface-2;
+        border-bottom: 2px solid $border-color;
+        border-radius: $radius $radius 0 0;
+        
+        .hour-time {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: $text-primary;
+            
+            .hour-date {
+                font-size: 0.8rem;
+                font-weight: 400;
+                color: $text-muted;
+                margin-left: 12px;
+            }
+        }
+        
+        .hour-actions {
+            display: flex;
+            gap: 8px;
+            
+            .btn-add {
+                padding: 6px 16px;
+                border-radius: $radius-sm;
+                background: $color-work;
+                color: #fff;
+                font-weight: 600;
+                font-size: 0.8rem;
+                border: none;
+                cursor: pointer;
+                transition: background 0.15s;
+                
+                &:hover {
+                    background: lighten($color-work, 8%);
+                }
+            }
+        }
+    }
+    
+    .hour-events {
+        padding: 12px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        background: $bg-body;
+        border-radius: 0 0 $radius $radius;
+        min-height: 200px;
+        
+        .hour-empty {
+            text-align: center;
+            padding: 40px 20px;
+            color: $text-muted;
+            
+            .empty-icon {
+                font-size: 2rem;
+                display: block;
+                margin-bottom: 8px;
+            }
+            .empty-text {
+                font-size: 0.9rem;
+            }
+            .empty-hint {
+                font-size: 0.7rem;
+                opacity: 0.6;
+                margin-top: 4px;
+            }
+        }
+        
+        .event-card {
+            background: $bg-surface;
+            border: 1px solid $border-color;
+            border-radius: $radius-sm;
+            padding: 12px 16px;
+            border-left: 4px solid $color-work;
+            transition: all 0.15s;
+            
+            &:hover {
+                background: $bg-hover;
+                border-color: $text-muted;
+            }
+            
+            &.completed {
+                opacity: 0.5;
+                text-decoration: line-through;
+                .event-card-title { text-decoration: line-through; }
+            }
+            
+            .event-card-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                gap: 6px;
+                
+                .event-card-title {
+                    font-size: 0.95rem;
+                    font-weight: 600;
+                    color: $text-primary;
+                }
+                
+                .event-card-badges {
+                    display: flex;
+                    gap: 6px;
+                    flex-wrap: wrap;
+                    
+                    .badge {
+                        padding: 1px 10px;
+                        border-radius: 12px;
+                        font-size: 0.6rem;
+                        font-weight: 600;
+                        text-transform: uppercase;
+                        letter-spacing: 0.3px;
+                        
+                        &.badge-priority {
+                            background: rgba($color-work, 0.15);
+                            color: $color-work;
+                            
+                            &.priority-1 { background: rgba($color-work, 0.2); color: $color-work; }
+                            &.priority-2 { background: rgba($color-family, 0.2); color: $color-family; }
+                            &.priority-3 { background: rgba($color-health, 0.15); color: $color-health; }
+                        }
+                        
+                        &.badge-category {
+                            background: rgba($color-work, 0.1);
+                            color: $text-secondary;
+                        }
+                        
+                        &.badge-recurring {
+                            background: rgba($color-personal, 0.15);
+                            color: $color-personal;
+                        }
+                        
+                        &.badge-completed {
+                            background: rgba($color-personal, 0.15);
+                            color: $color-personal;
+                        }
+                    }
+                }
+            }
+            
+            .event-card-details {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 12px;
+                margin-top: 6px;
+                font-size: 0.8rem;
+                color: $text-muted;
+                
+                .detail-item {
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+                    
+                    .detail-icon {
+                        font-size: 0.7rem;
+                    }
+                }
+            }
+            
+            .event-card-description {
+                margin-top: 8px;
+                padding-top: 8px;
+                border-top: 1px solid $border-color;
+                font-size: 0.8rem;
+                color: $text-secondary;
+                line-height: 1.4;
+            }
+            
+            .event-card-actions {
+                display: flex;
+                gap: 8px;
+                margin-top: 10px;
+                padding-top: 8px;
+                border-top: 1px solid $border-color;
+                
+                .btn-action {
+                    padding: 4px 14px;
+                    border-radius: $radius-sm;
+                    font-size: 0.7rem;
+                    font-weight: 500;
+                    border: 1px solid $border-color;
+                    background: $bg-body;
+                    color: $text-secondary;
+                    cursor: pointer;
+                    transition: all 0.15s;
+                    
+                    &:hover {
+                        background: $bg-hover;
+                        color: $text-primary;
+                    }
+                    
+                    &.btn-edit {
+                        border-color: $color-work;
+                        color: $color-work;
+                        &:hover { background: rgba($color-work, 0.1); }
+                    }
+                    
+                    &.btn-complete {
+                        border-color: $color-personal;
+                        color: $color-personal;
+                        &:hover { background: rgba($color-personal, 0.1); }
+                    }
+                    
+                    &.btn-delete {
+                        border-color: $color-health;
+                        color: $color-health;
+                        &:hover { background: rgba($color-health, 0.1); }
+                    }
+                    
+                    &.btn-cycle {
+                        border-color: $color-family;
+                        color: $color-family;
+                        &:hover { background: rgba($color-family, 0.1); }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Responsive: Hour View
+@media (max-width: 768px) {
+    .hour-view {
+        .hour-view-header {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 8px;
+            padding: 10px 14px;
+            
+            .hour-time {
+                font-size: 1rem;
+                text-align: center;
+                .hour-date {
+                    display: block;
+                    margin-left: 0;
+                    margin-top: 2px;
+                }
+            }
+            
+            .hour-actions {
+                justify-content: center;
+            }
+        }
+        
+        .hour-events {
+            padding: 8px 10px;
+            
+            .event-card {
+                padding: 10px 12px;
+                
+                .event-card-header {
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
+                
+                .event-card-details {
+                    flex-direction: column;
+                    gap: 4px;
+                }
+                
+                .event-card-actions {
+                    flex-wrap: wrap;
+                }
+            }
+        }
+    }
+}

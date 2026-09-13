@@ -1,0 +1,256 @@
+// /scss/_task.scss
+// ============================================================
+// TASK VIEW — Single event, full details with inline edit
+// ============================================================
+
+.task-view {
+    .task-container {
+        max-width: 640px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    .task-card {
+        background: $bg-surface;
+        border: 1px solid $border-color;
+        border-radius: $radius;
+        padding: 28px 32px;
+        box-shadow: $shadow-lg;
+        border-left: 6px solid $color-work;
+        
+        .task-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 16px;
+            
+            .task-title-area {
+                flex: 1;
+                
+                .task-title {
+                    font-size: 1.6rem;
+                    font-weight: 700;
+                    color: $text-primary;
+                    margin: 0;
+                    line-height: 1.2;
+                }
+                
+                .task-subtitle {
+                    font-size: 0.85rem;
+                    color: $text-muted;
+                    margin-top: 4px;
+                }
+            }
+            
+            .task-status-badge {
+                padding: 4px 16px;
+                border-radius: 20px;
+                font-size: 0.7rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                white-space: nowrap;
+                
+                &.status-incomplete {
+                    background: rgba($color-work, 0.15);
+                    color: $color-work;
+                }
+                
+                &.status-complete {
+                    background: rgba($color-personal, 0.15);
+                    color: $color-personal;
+                }
+            }
+        }
+        
+        .task-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 24px;
+            padding: 16px 0;
+            border-top: 1px solid $border-color;
+            border-bottom: 1px solid $border-color;
+            margin-bottom: 16px;
+            
+            .detail-row {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 4px 0;
+                
+                .detail-icon {
+                    font-size: 0.9rem;
+                    width: 24px;
+                    text-align: center;
+                    flex-shrink: 0;
+                }
+                
+                .detail-label {
+                    font-size: 0.7rem;
+                    font-weight: 600;
+                    color: $text-muted;
+                    text-transform: uppercase;
+                    letter-spacing: 0.3px;
+                    min-width: 70px;
+                }
+                
+                .detail-value {
+                    font-size: 0.9rem;
+                    color: $text-primary;
+                    word-break: break-word;
+                    
+                    &.priority-1 { color: $color-work; font-weight: 600; }
+                    &.priority-2 { color: $color-family; font-weight: 600; }
+                    &.priority-3 { color: $color-health; font-weight: 600; }
+                }
+            }
+        }
+        
+        .task-notes {
+            margin-bottom: 20px;
+            
+            .notes-label {
+                font-size: 0.7rem;
+                font-weight: 600;
+                color: $text-muted;
+                text-transform: uppercase;
+                letter-spacing: 0.3px;
+                display: block;
+                margin-bottom: 4px;
+            }
+            
+            .notes-content {
+                font-size: 0.9rem;
+                color: $text-secondary;
+                line-height: 1.6;
+                padding: 8px 12px;
+                background: $bg-body;
+                border-radius: $radius-sm;
+                border: 1px solid $border-color;
+                min-height: 60px;
+                white-space: pre-wrap;
+            }
+            
+            .notes-edit {
+                width: 100%;
+                min-height: 80px;
+                padding: 10px 12px;
+                font-size: 0.9rem;
+                background: $bg-body;
+                color: $text-primary;
+                border: 1px solid $border-color;
+                border-radius: $radius-sm;
+                resize: vertical;
+                font-family: inherit;
+                
+                &:focus {
+                    border-color: $color-work;
+                    outline: 2px solid rgba($color-work, 0.2);
+                }
+            }
+        }
+        
+        .task-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding-top: 16px;
+            border-top: 1px solid $border-color;
+            
+            .btn-task {
+                padding: 8px 20px;
+                border-radius: $radius-sm;
+                font-weight: 600;
+                font-size: 0.85rem;
+                border: 1px solid $border-color;
+                background: $bg-body;
+                color: $text-secondary;
+                cursor: pointer;
+                transition: all 0.15s;
+                
+                &:hover {
+                    background: $bg-hover;
+                    color: $text-primary;
+                }
+                
+                &.btn-primary {
+                    background: $color-work;
+                    color: #fff;
+                    border-color: $color-work;
+                    &:hover { background: lighten($color-work, 8%); }
+                }
+                
+                &.btn-success {
+                    background: $color-personal;
+                    color: #fff;
+                    border-color: $color-personal;
+                    &:hover { background: lighten($color-personal, 8%); }
+                }
+                
+                &.btn-danger {
+                    background: $color-health;
+                    color: #fff;
+                    border-color: $color-health;
+                    &:hover { background: lighten($color-health, 8%); }
+                }
+                
+                &.btn-secondary {
+                    background: $bg-surface-2;
+                    color: $text-muted;
+                    &:hover { background: $bg-hover; color: $text-primary; }
+                }
+                
+                &.btn-edit {
+                    border-color: $color-work;
+                    color: $color-work;
+                    &:hover { background: rgba($color-work, 0.1); }
+                }
+                
+                &.btn-save {
+                    background: $color-work;
+                    color: #fff;
+                    border-color: $color-work;
+                    &:hover { background: lighten($color-work, 8%); }
+                }
+                
+                &.btn-cancel {
+                    background: transparent;
+                    color: $text-muted;
+                    &:hover { color: $text-primary; }
+                }
+            }
+        }
+    }
+}
+
+// Responsive: Task View
+@media (max-width: 600px) {
+    .task-view .task-card {
+        padding: 16px;
+        
+        .task-header .task-title-area .task-title {
+            font-size: 1.2rem;
+        }
+        
+        .task-details {
+            grid-template-columns: 1fr;
+            gap: 4px;
+            
+            .detail-row .detail-label {
+                min-width: 60px;
+                font-size: 0.65rem;
+            }
+        }
+        
+        .task-actions {
+            flex-direction: column;
+            
+            .btn-task {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    }
+}

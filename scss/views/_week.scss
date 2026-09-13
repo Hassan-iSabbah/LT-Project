@@ -1,0 +1,765 @@
+// /scss/_week.scss
+// ============================================================
+// WEEK VIEW — 7 DAYS × 24 HOURS
+// Condensed calendar with category neon glow
+// ============================================================
+
+.week-view {
+    width: 100%;
+    overflow-x: auto;
+    position: relative;
+
+    // ========================================================
+    // WEEK HEADER
+    // ========================================================
+
+    .week-header {
+        display: grid;
+        grid-template-columns: 60px repeat(7, minmax(0, 1fr));
+
+        background: $bg-surface-2;
+        border-bottom: 2px solid $border-color;
+
+        position: sticky;
+        top: 0;
+        z-index: 20;
+
+        min-width: 700px;
+
+        .week-header-spacer {
+            border-right: 1px solid $border-color;
+        }
+
+        .week-day-header {
+            min-width: 0;
+            padding: 8px 4px;
+
+            text-align: center;
+
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: $text-muted;
+
+            border-right: 1px solid $border-color;
+
+            &:last-child {
+                border-right: none;
+            }
+
+            // ------------------------------------------------
+            // Day Name
+            // ------------------------------------------------
+
+            .day-name {
+                display: block;
+
+                font-size: 0.6rem;
+                font-weight: 600;
+
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+
+            // ------------------------------------------------
+            // Day Date
+            // ------------------------------------------------
+
+            .day-date {
+                display: block;
+
+                margin-top: 2px;
+
+                font-size: 1rem;
+                font-weight: 700;
+
+                color: $text-primary;
+            }
+
+            // ------------------------------------------------
+            // Today
+            // ------------------------------------------------
+
+            &.today {
+                background: rgba($color-work, 0.08);
+
+                .day-date {
+                    color: $color-work;
+
+                    text-shadow:
+                        0 0 8px rgba($color-work, 0.4),
+                        0 0 20px rgba($color-work, 0.2);
+                }
+            }
+        }
+    }
+
+
+    // ========================================================
+    // HOUR ROW
+    // ========================================================
+
+    .hour-row {
+        display: grid;
+        grid-template-columns: 60px repeat(7, minmax(0, 1fr));
+
+        min-height: 48px;
+        min-width: 700px;
+
+        border-bottom: 1px solid $border-color;
+
+        transition: background 0.15s ease;
+
+        &:hover {
+            background: $bg-hover;
+        }
+
+
+        // ====================================================
+        // HOUR LABEL
+        // ====================================================
+
+        .hour-label {
+            grid-column: 1;
+
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+
+            padding: 4px 12px 4px 8px;
+
+            font-size: 0.65rem;
+            font-weight: 500;
+
+            color: $text-muted;
+
+            border-right: 1px solid $border-color;
+
+            white-space: nowrap;
+        }
+
+
+        // ====================================================
+        // HOUR CELL
+        // ====================================================
+
+        .hour-cell {
+            min-width: 0;
+            min-height: 48px;
+
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            align-content: center;
+
+            gap: 3px;
+
+            padding: 2px 4px;
+
+            position: relative;
+
+            border-right: 1px solid $border-color;
+
+            cursor: pointer;
+
+            transition:
+                background 0.15s ease,
+                box-shadow 0.15s ease;
+
+            &:last-child {
+                border-right: none;
+            }
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.015);
+            }
+
+
+            // =================================================
+            // EMPTY SLOT
+            // =================================================
+
+            .empty-slot {
+                display: block;
+
+                width: 100%;
+
+                color: $text-muted;
+
+                font-size: 0.7rem;
+
+                opacity: 0.25;
+
+                transition: opacity 0.2s ease;
+            }
+
+            &:hover .empty-slot {
+                opacity: 0.5;
+            }
+
+
+            // =================================================
+            // EVENT PILL
+            // =================================================
+
+            .event-pill {
+                display: inline-flex;
+                align-items: center;
+
+                min-width: 0;
+                max-width: 100%;
+
+                padding: 2px 6px 2px 5px;
+
+                border: 1px solid transparent;
+                border-left-width: 3px;
+                border-radius: 20px;
+
+                font-size: 0.6rem;
+                line-height: 1.3;
+
+                cursor: pointer;
+
+                position: relative;
+
+                overflow: hidden;
+
+                transition:
+                    transform 0.2s ease,
+                    box-shadow 0.2s ease,
+                    background 0.2s ease,
+                    opacity 0.2s ease;
+
+                // ------------------------------------------------
+                // Event Title
+                // ------------------------------------------------
+
+                .event-title {
+                    display: block;
+
+                    min-width: 0;
+                    max-width: 100%;
+
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+
+                    font-size: 0.6rem;
+                    font-weight: 600;
+                }
+
+                // ------------------------------------------------
+                // Venue
+                // ------------------------------------------------
+
+                .event-venue {
+                    display: none;
+                }
+
+                // ------------------------------------------------
+                // Priority Badge
+                // ------------------------------------------------
+
+                .priority-badge {
+                    flex-shrink: 0;
+
+                    margin-left: 3px;
+                    padding: 0 4px;
+
+                    border-radius: 8px;
+
+                    background: rgba(0, 0, 0, 0.3);
+
+                    font-size: 0.5rem;
+                    line-height: 1.4;
+                }
+
+                // ------------------------------------------------
+                // More Badge
+                // ------------------------------------------------
+
+                .more-badge {
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    flex-shrink: 0;
+
+                    padding: 0 6px;
+
+                    min-height: 16px;
+
+                    border-radius: 12px;
+
+                    background: rgba(255, 255, 255, 0.06);
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+
+                    font-size: 0.55rem;
+
+                    transition:
+                        background 0.2s ease,
+                        transform 0.2s ease;
+
+                    &:hover {
+                        background: rgba(255, 255, 255, 0.15);
+                        transform: scale(1.05);
+                    }
+                }
+
+                // ------------------------------------------------
+                // Priority Cycle Arrow
+                // ------------------------------------------------
+
+                .cycle-arrow {
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    flex-shrink: 0;
+
+                    margin-left: 2px;
+
+                    font-size: 0.5rem;
+
+                    opacity: 0.5;
+
+                    cursor: pointer;
+
+                    transition: opacity 0.2s ease;
+
+                    &:hover {
+                        opacity: 1;
+                    }
+                }
+
+
+                // =================================================
+                // CATEGORY — WORK
+                // =================================================
+
+                &[data-color="Work"] {
+                    border-left-color: $color-work;
+
+                    background: rgba($color-work, 0.12);
+
+                    box-shadow:
+                        0 0 8px rgba($color-work, 0.2),
+                        inset 0 0 8px rgba($color-work, 0.05);
+
+                    &:hover {
+                        background: rgba($color-work, 0.18);
+
+                        box-shadow:
+                            0 0 20px rgba($color-work, 0.35),
+                            0 0 60px rgba($color-work, 0.1);
+
+                        transform: translateY(-1px) scale(1.02);
+                    }
+                }
+
+
+                // =================================================
+                // CATEGORY — PERSONAL
+                // =================================================
+
+                &[data-color="Personal"] {
+                    border-left-color: $color-personal;
+
+                    background: rgba($color-personal, 0.12);
+
+                    box-shadow:
+                        0 0 8px rgba($color-personal, 0.2),
+                        inset 0 0 8px rgba($color-personal, 0.05);
+
+                    &:hover {
+                        background: rgba($color-personal, 0.18);
+
+                        box-shadow:
+                            0 0 20px rgba($color-personal, 0.35),
+                            0 0 60px rgba($color-personal, 0.1);
+
+                        transform: translateY(-1px) scale(1.02);
+                    }
+                }
+
+
+                // =================================================
+                // CATEGORY — HEALTH
+                // =================================================
+
+                &[data-color="Health"] {
+                    border-left-color: $color-health;
+
+                    background: rgba($color-health, 0.12);
+
+                    box-shadow:
+                        0 0 8px rgba($color-health, 0.2),
+                        inset 0 0 8px rgba($color-health, 0.05);
+
+                    &:hover {
+                        background: rgba($color-health, 0.18);
+
+                        box-shadow:
+                            0 0 20px rgba($color-health, 0.35),
+                            0 0 60px rgba($color-health, 0.1);
+
+                        transform: translateY(-1px) scale(1.02);
+                    }
+                }
+
+
+                // =================================================
+                // CATEGORY — FAMILY
+                // =================================================
+
+                &[data-color="Family"] {
+                    border-left-color: $color-family;
+
+                    background: rgba($color-family, 0.12);
+
+                    box-shadow:
+                        0 0 8px rgba($color-family, 0.2),
+                        inset 0 0 8px rgba($color-family, 0.05);
+
+                    &:hover {
+                        background: rgba($color-family, 0.18);
+
+                        box-shadow:
+                            0 0 20px rgba($color-family, 0.35),
+                            0 0 60px rgba($color-family, 0.1);
+
+                        transform: translateY(-1px) scale(1.02);
+                    }
+                }
+
+
+                // =================================================
+                // CATEGORY — ERRANDS
+                // =================================================
+
+                &[data-color="Errands"] {
+                    border-left-color: $color-errands;
+
+                    background: rgba($color-errands, 0.12);
+
+                    box-shadow:
+                        0 0 8px rgba($color-errands, 0.2),
+                        inset 0 0 8px rgba($color-errands, 0.05);
+
+                    &:hover {
+                        background: rgba($color-errands, 0.18);
+
+                        box-shadow:
+                            0 0 20px rgba($color-errands, 0.35),
+                            0 0 60px rgba($color-errands, 0.1);
+
+                        transform: translateY(-1px) scale(1.02);
+                    }
+                }
+
+
+                // =================================================
+                // CATEGORY — UNI
+                // =================================================
+
+                &[data-color="UNI"] {
+                    border-left-color: $color-uni;
+
+                    background: rgba($color-uni, 0.12);
+
+                    box-shadow:
+                        0 0 8px rgba($color-uni, 0.2),
+                        inset 0 0 8px rgba($color-uni, 0.05);
+
+                    &:hover {
+                        background: rgba($color-uni, 0.18);
+
+                        box-shadow:
+                            0 0 20px rgba($color-uni, 0.35),
+                            0 0 60px rgba($color-uni, 0.1);
+
+                        transform: translateY(-1px) scale(1.02);
+                    }
+                }
+
+
+                // =================================================
+                // COMPLETED EVENT
+                // =================================================
+
+                &.completed {
+                    opacity: 0.4;
+
+                    filter: grayscale(0.6);
+
+                    .event-title {
+                        text-decoration: line-through;
+                    }
+
+                    &:hover {
+                        opacity: 0.65;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+// ============================================================
+// PRIORITY BADGES
+// ============================================================
+
+.week-view {
+
+    .event-pill.priority-high {
+
+        .priority-badge {
+            background: rgba($color-work, 0.3);
+            color: $color-work;
+        }
+    }
+
+    .event-pill.priority-medium {
+
+        .priority-badge {
+            background: rgba($color-family, 0.3);
+            color: $color-family;
+        }
+    }
+
+    .event-pill.priority-low {
+
+        .priority-badge {
+            background: rgba($color-health, 0.3);
+            color: $color-health;
+        }
+    }
+}
+
+
+// ============================================================
+// RESPONSIVE — TABLET
+// ============================================================
+
+@media (max-width: 768px) {
+
+    .week-view {
+
+        .week-header {
+            grid-template-columns: 50px repeat(7, minmax(80px, 1fr));
+
+            .week-day-header {
+
+                padding: 7px 3px;
+
+                font-size: 0.6rem;
+
+                .day-name {
+                    font-size: 0.55rem;
+                }
+
+                .day-date {
+                    font-size: 0.8rem;
+                }
+            }
+        }
+
+
+        .hour-row {
+            grid-template-columns: 50px repeat(7, minmax(80px, 1fr));
+
+            min-height: 40px;
+
+            .hour-label {
+                padding-right: 6px;
+
+                font-size: 0.55rem;
+            }
+
+            .hour-cell {
+                min-height: 40px;
+
+                padding: 1px 2px;
+
+                .event-pill {
+
+                    .event-title {
+                        max-width: 80px;
+                        font-size: 0.55rem;
+                    }
+
+                    .priority-badge {
+                        display: none;
+                    }
+                }
+
+                .empty-slot {
+                    font-size: 0.6rem;
+                }
+            }
+        }
+    }
+}
+
+
+// ============================================================
+// RESPONSIVE — MOBILE
+// ============================================================
+
+@media (max-width: 480px) {
+
+    .week-view {
+
+        .week-header {
+            grid-template-columns: 40px repeat(7, minmax(70px, 1fr));
+
+            .week-day-header {
+
+                padding: 5px 2px;
+
+                .day-name {
+                    font-size: 0.5rem;
+                }
+
+                .day-date {
+                    font-size: 0.7rem;
+                }
+            }
+        }
+
+
+        .hour-row {
+            grid-template-columns: 40px repeat(7, minmax(70px, 1fr));
+
+            min-height: 34px;
+
+            .hour-label {
+                padding-right: 4px;
+
+                font-size: 0.5rem;
+            }
+
+            .hour-cell {
+                min-height: 34px;
+
+                padding: 1px;
+
+                .event-pill {
+                    padding: 1px 4px;
+
+                    font-size: 0.45rem;
+
+                    .event-title {
+                        max-width: 60px;
+                        font-size: 0.45rem;
+                    }
+
+                    .priority-badge {
+                        display: none;
+                    }
+
+                    .more-badge {
+                        padding: 0 4px;
+
+                        min-height: 14px;
+
+                        font-size: 0.45rem;
+                    }
+
+                    .cycle-arrow {
+                        display: none;
+                    }
+                }
+
+                .empty-slot {
+                    font-size: 0.5rem;
+                }
+            }
+        }
+    }
+}
+
+// ===== DRAG-AND-DROP STYLES =====
+.event-pill {
+    .drag-handle {
+        cursor: grab;
+        color: $text-muted;
+        font-size: 0.7rem;
+        margin-right: 2px;
+        user-select: none;
+        opacity: 0.4;
+        transition: opacity 0.2s;
+        
+        &:hover {
+            opacity: 1;
+        }
+    }
+    
+    &.dragging-original {
+        opacity: 0.3 !important;
+        transform: scale(0.95);
+    }
+}
+
+.dragging-clone {
+    cursor: grabbing !important;
+    .drag-handle {
+        cursor: grabbing !important;
+    }
+}
+
+// Drop zone highlighting
+.hour-cell {
+    transition: background 0.15s, border-color 0.15s;
+    
+    &.drop-zone {
+        background: rgba($color-work, 0.05);
+        border-color: $color-work;
+    }
+    
+    &.drop-target {
+        background: rgba($color-work, 0.15);
+        border-color: $color-work;
+        box-shadow: inset 0 0 20px rgba($color-work, 0.1);
+        
+        .empty-slot {
+            opacity: 1;
+            color: $color-work;
+        }
+    }
+}
+
+// Cross-day drag visual feedback
+.week-view {
+    .week-day-header {
+        transition: background 0.15s, color 0.15s;
+        
+        &.drop-target-day {
+            background: rgba($color-work, 0.15);
+            color: $color-work;
+            
+            .day-date {
+                color: $color-work;
+                text-shadow: 0 0 20px rgba($color-work, 0.2);
+            }
+        }
+    }
+}
+// ============================================================
+// GOAL INDICATOR
+// ============================================================
+
+.event-pill {
+    .goal-indicator {
+        font-size: 0.65rem;
+        margin-left: 2px;
+        cursor: default;
+        opacity: 0.8;
+        transition: opacity 0.2s;
+        flex-shrink: 0;
+        
+        &:hover {
+            opacity: 1;
+        }
+    }
+}

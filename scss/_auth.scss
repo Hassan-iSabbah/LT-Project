@@ -1,0 +1,131 @@
+// /scss/_auth.scss
+.auth-page {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $bg-body;
+    padding: 20px;
+}
+
+.auth-container {
+    background: $bg-surface;
+    border: 1px solid $border-color;
+    border-radius: $radius;
+    box-shadow: $shadow-lg;
+    padding: 36px 40px;
+    max-width: 400px;
+    width: 100%;
+
+    h2 {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: $text-primary;
+        margin-bottom: 4px;
+    }
+    .subtitle {
+        color: $text-muted;
+        font-size: 0.9rem;
+        margin-bottom: 24px;
+        border-bottom: 1px solid $border-color;
+        padding-bottom: 14px;
+    }
+
+    .alert {
+        padding: 10px 14px;
+        border-radius: $radius-sm;
+        margin-bottom: 14px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        &.error {
+            background: rgba($color-health, 0.15);
+            color: $color-health;
+            border-left: 3px solid $color-health;
+        }
+        &.success {
+            background: rgba($color-personal, 0.15);
+            color: $color-personal;
+            border-left: 3px solid $color-personal;
+        }
+    }
+
+    .form-group {
+        margin-bottom: 14px;
+        label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            color: $text-muted;
+            margin-bottom: 3px;
+        }
+        input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid $border-color;
+            border-radius: $radius-sm;
+            background: $bg-body;
+            color: $text-primary;
+            font-size: 0.95rem;
+            &:focus {
+                border-color: $color-work;
+                outline: 2px solid rgba($color-work, 0.15);
+            }
+            &::placeholder {
+                color: $text-muted;
+            }
+        }
+    }
+
+    .btn-primary {
+        width: 100%;
+        padding: 12px;
+        background: $color-work;
+        color: #fff;
+        font-weight: 700;
+        font-size: 0.95rem;
+        border: none;
+        border-radius: $radius-sm;
+        cursor: pointer;
+        transition: 0.15s;
+        &:hover {
+            background: lighten($color-work, 8%);
+        }
+        &:active {
+            transform: scale(0.97);
+        }
+    }
+
+    .auth-footer {
+        margin-top: 18px;
+        text-align: center;
+        font-size: 0.85rem;
+        color: $text-muted;
+        a {
+            color: $color-work;
+            font-weight: 600;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .demo-hint {
+        margin-top: 16px;
+        padding: 10px;
+        background: rgba($color-work, 0.06);
+        border-radius: $radius-sm;
+        font-size: 0.75rem;
+        color: $text-muted;
+        text-align: center;
+        border: 1px dashed $border-color;
+        code {
+            background: $bg-body;
+            padding: 1px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: $color-work;
+        }
+    }
+}

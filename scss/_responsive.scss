@@ -1,0 +1,71 @@
+// /scss/_responsive.scss
+@include respond-to($breakpoint-md) {
+    .calendar-wrapper {
+        border-radius: $radius;
+    }
+    .hour-row .hour-label {
+        font-size: 0.75rem;
+    }
+    .event-pill .event-title {
+        max-width: 120px;
+    }
+}
+
+@include respond-to($breakpoint-sm) {
+    .event-pill .event-title {
+        max-width: 60px;
+    }
+    .event-pill .event-venue {
+        display: none;
+    }
+    .floating-panel {
+        padding: 18px;
+        min-width: auto;
+        width: 95%;
+    }
+}
+
+// Week View Responsive
+@media (max-width: 768px) {
+    .week-view {
+        .week-header .week-day-header {
+            font-size: 0.6rem;
+            .day-date { font-size: 0.8rem; }
+        }
+        .hour-row {
+            grid-template-columns: 50px repeat(7, 1fr);
+            min-height: 40px;
+            .hour-label { font-size: 0.55rem; padding-right: 6px; width: 50px; }
+            .hour-cell {
+                min-height: 40px;
+                padding: 1px 2px;
+                .event-pill .event-title { max-width: 30px; }
+            }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .week-view {
+        .week-header .week-day-header {
+            .day-name { font-size: 0.5rem; }
+            .day-date { font-size: 0.7rem; }
+        }
+        .hour-row {
+            grid-template-columns: 40px repeat(7, 1fr);
+            min-height: 34px;
+            .hour-label { font-size: 0.5rem; padding-right: 4px; width: 40px; }
+            .hour-cell {
+                min-height: 34px;
+                padding: 1px 1px;
+                .event-pill {
+                    font-size: 0.5rem;
+                    padding: 0 4px;
+                    .event-title { max-width: 20px; }
+                    .priority-badge { display: none; }
+                }
+                .empty-slot { font-size: 0.6rem; }
+            }
+        }
+    }
+}

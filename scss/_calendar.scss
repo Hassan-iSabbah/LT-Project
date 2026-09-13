@@ -1,0 +1,257 @@
+// ============================================================
+// CALENDAR BREADCRUMB & ZOOM CONTROLS
+// ============================================================
+
+.calendar-breadcrumb {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    border-bottom: 1px solid $border-color;
+    background: $bg-surface-2;
+    flex-wrap: wrap;
+    gap: 10px;
+    border-radius: $radius $radius 0 0;
+
+    .view-label {
+        font-weight: 600;
+        font-size: 1rem;
+        color: $text-primary;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        .view-icon {
+            font-size: 1.1rem;
+        }
+    }
+
+    .zoom-controls {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-wrap: wrap;
+
+        button {
+            padding: 6px 16px;
+            border-radius: $radius-sm;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: 1px solid $border-color;
+            background: $bg-body;
+            color: $text-secondary;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-family: inherit;
+
+            &:hover {
+                background: $bg-hover;
+                color: $text-primary;
+                border-color: $text-muted;
+                transform: translateY(-1px);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            }
+
+            &:active {
+                transform: scale(0.95);
+            }
+
+            // ---- Zoom In ----
+            &[data-zoom="in"] {
+                border-color: $color-work;
+                color: $color-work;
+                background: rgba($color-work, 0.06);
+
+                &:hover {
+                    background: rgba($color-work, 0.15);
+                    box-shadow: 0 0 20px rgba($color-work, 0.15);
+                }
+            }
+
+            // ---- Zoom Out ----
+            &[data-zoom="out"] {
+                border-color: $color-family;
+                color: $color-family;
+                background: rgba($color-family, 0.06);
+
+                &:hover {
+                    background: rgba($color-family, 0.15);
+                    box-shadow: 0 0 20px rgba($color-family, 0.15);
+                }
+            }
+
+            // ---- Today ----
+            &[data-zoom="today"] {
+                border-color: $color-personal;
+                color: $color-personal;
+                background: rgba($color-personal, 0.06);
+
+                &:hover {
+                    background: rgba($color-personal, 0.15);
+                    box-shadow: 0 0 20px rgba($color-personal, 0.15);
+                }
+            }
+
+            // Disabled state
+            &:disabled {
+                opacity: 0.3;
+                cursor: not-allowed;
+                transform: none !important;
+                box-shadow: none !important;
+            }
+        }
+    }
+}
+
+
+// ============================================================
+// DAY VIEW
+// ============================================================
+
+.day-view {
+    .day-header {
+        text-align: center;
+        padding: 12px 0;
+        border-bottom: 2px solid $border-color;
+        background: $bg-surface-2;
+        
+        .day-name {
+            display: block;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: $text-primary;
+        }
+        
+        .day-date {
+            display: block;
+            font-size: 0.9rem;
+            color: $text-muted;
+        }
+    }
+    
+    .day-columns {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 0;
+        border: 1px solid $border-color;
+        border-radius: 0 0 $radius $radius;
+        overflow: hidden;
+        
+        .day-column {
+            border-right: 1px solid $border-color;
+            
+            &:last-child {
+                border-right: none;
+            }
+            
+            .column-label {
+                text-align: center;
+                padding: 6px 0;
+                font-size: 0.7rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                color: $text-muted;
+                background: $bg-surface;
+                border-bottom: 1px solid $border-color;
+            }
+            
+            .day-hour-row {
+                display: flex;
+                border-bottom: 1px solid $border-color;
+                min-height: 44px;
+                
+                &:hover {
+                    background: $bg-hover;
+                }
+                
+                .hour-label {
+                    width: 50px;
+                    flex-shrink: 0;
+                    padding: 2px 6px;
+                    font-size: 0.6rem;
+                    font-weight: 500;
+                    color: $text-muted;
+                    border-right: 1px solid $border-color;
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-end;
+                    padding-right: 8px;
+                }
+                
+                .hour-cell {
+                    flex: 1;
+                    padding: 2px 4px;
+                    min-height: 44px;
+                    display: flex;
+                    flex-wrap: wrap;
+                    align-items: center;
+                    gap: 2px;
+                    cursor: pointer;
+                    
+                    .empty-slot {
+                        color: $text-muted;
+                        font-size: 0.7rem;
+                        opacity: 0.3;
+                        transition: opacity 0.2s;
+                        
+                        .day-hour-row:hover & {
+                            opacity: 0.6;
+                        }
+                    }
+                    
+                    .event-pill {
+                        font-size: 0.65rem;
+                        padding: 2px 8px 2px 6px;
+                        
+                        .event-title {
+                            max-width: 70px;
+                            font-size: 0.65rem;
+                        }
+                        
+                        .event-venue {
+                            display: inline-block;
+                            font-size: 0.55rem;
+                            max-width: 40px;
+                            color: $text-muted;
+                        }
+                        
+                        .priority-badge {
+                            font-size: 0.5rem;
+                            padding: 0 4px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+// ============================================================
+// RESPONSIVE — DAY VIEW
+// ============================================================
+
+@media (max-width: 768px) {
+    .day-view .day-columns {
+        grid-template-columns: 1fr 1fr;
+        
+        .day-column:last-child {
+            border-right: none;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .day-view .day-columns {
+        grid-template-columns: 1fr;
+        
+        .day-column {
+            border-right: none;
+            border-bottom: 1px solid $border-color;
+        }
+    }
+}

@@ -1,0 +1,123 @@
+// /scss/_sync.scss
+.sync-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 10002;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(6px);
+
+    .sync-modal {
+        background: $bg-surface;
+        border: 1px solid $border-color;
+        border-radius: $radius;
+        padding: 28px 32px;
+        max-width: 420px;
+        width: 92%;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+
+        .sync-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid $border-color;
+
+            h3 {
+                color: $text-primary;
+                font-size: 1.1rem;
+                font-weight: 700;
+                margin: 0;
+            }
+
+            .sync-close {
+                background: none;
+                border: none;
+                font-size: 1.8rem;
+                color: $text-muted;
+                cursor: pointer;
+                transition: 0.15s;
+                &:hover {
+                    color: $color-health;
+                    transform: rotate(90deg);
+                }
+            }
+        }
+
+        .sync-body {
+            .sync-input-group {
+                margin-bottom: 8px;
+
+                label {
+                    display: block;
+                    font-size: 0.8rem;
+                    font-weight: 600;
+                    color: $text-muted;
+                    margin-bottom: 4px;
+                    text-transform: uppercase;
+                    letter-spacing: 0.3px;
+                }
+
+                input {
+                    width: 100%;
+                    padding: 10px 12px;
+                    background: $bg-body;
+                    color: $text-primary;
+                    border: 1px solid $border-color;
+                    border-radius: $radius-sm;
+                    font-size: 1.1rem;
+                    transition: 0.15s;
+
+                    &:focus {
+                        border-color: $color-work;
+                        outline: none;
+                        box-shadow: 0 0 0 3px rgba($color-work, 0.12);
+                    }
+                }
+            }
+        }
+
+        .sync-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid $border-color;
+
+            .btn-primary {
+                padding: 10px 28px;
+                background: $color-personal;
+                color: #fff;
+                border: none;
+                border-radius: $radius-sm;
+                font-weight: 600;
+                cursor: pointer;
+                transition: 0.15s;
+                flex: 1;
+                &:hover {
+                    background: lighten($color-personal, 8%);
+                }
+            }
+
+            .btn-secondary {
+                padding: 10px 24px;
+                background: transparent;
+                color: $text-muted;
+                border: 1px solid $border-color;
+                border-radius: $radius-sm;
+                cursor: pointer;
+                transition: 0.15s;
+                &:hover {
+                    background: $bg-hover;
+                    color: $text-primary;
+                }
+            }
+        }
+    }
+}

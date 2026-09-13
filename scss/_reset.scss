@@ -1,0 +1,50 @@
+// /scss/_reset.scss
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: $font-family;
+    background: $bg-body;
+    color: $text-primary;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color: $color-work;
+    text-decoration: none;
+    &:hover { color: lighten($color-work, 15%); }
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    background: none;
+    color: $text-primary;
+}
+
+input, textarea, select {
+    font-family: inherit;
+    font-size: 0.9rem;
+    background: $bg-body;
+    color: $text-primary;
+    border: 1px solid $border-color;
+    border-radius: $radius-sm;
+    padding: 6px 10px;
+    &:focus {
+        outline: 2px solid rgba($color-work, 0.4);
+        border-color: $color-work;
+    }
+    &::placeholder {
+        color: $text-muted;
+    }
+}
+
+select option {
+    background: $bg-surface;
+    color: $text-primary;
+}

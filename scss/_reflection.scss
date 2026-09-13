@@ -1,0 +1,123 @@
+// /scss/_reflection.scss
+.reflection-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 10001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(6px);
+
+    .reflection-modal {
+        background: $bg-surface;
+        border: 1px solid $border-color;
+        border-radius: $radius;
+        padding: 28px 32px;
+        max-width: 520px;
+        width: 92%;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+
+        .reflection-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid $border-color;
+
+            h3 {
+                color: $text-primary;
+                font-size: 1.2rem;
+                font-weight: 700;
+                margin: 0;
+            }
+
+            .reflection-close {
+                background: none;
+                border: none;
+                font-size: 1.8rem;
+                color: $text-muted;
+                cursor: pointer;
+                transition: 0.15s;
+                &:hover {
+                    color: $color-health;
+                    transform: rotate(90deg);
+                }
+            }
+        }
+
+        .reflection-question {
+            margin-bottom: 16px;
+
+            label {
+                display: block;
+                font-size: 0.9rem;
+                font-weight: 600;
+                color: $text-primary;
+                margin-bottom: 4px;
+            }
+
+            textarea {
+                width: 100%;
+                padding: 10px 12px;
+                background: $bg-body;
+                color: $text-primary;
+                border: 1px solid $border-color;
+                border-radius: $radius-sm;
+                font-size: 0.95rem;
+                resize: vertical;
+                min-height: 60px;
+                font-family: inherit;
+                transition: 0.15s;
+
+                &:focus {
+                    border-color: $color-work;
+                    outline: none;
+                    box-shadow: 0 0 0 3px rgba($color-work, 0.12);
+                }
+            }
+        }
+
+        .reflection-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 8px;
+            padding-top: 16px;
+            border-top: 1px solid $border-color;
+
+            .btn-primary {
+                padding: 10px 28px;
+                background: $color-work;
+                color: #fff;
+                border: none;
+                border-radius: $radius-sm;
+                font-weight: 600;
+                cursor: pointer;
+                transition: 0.15s;
+                &:hover {
+                    background: lighten($color-work, 8%);
+                }
+            }
+
+            .btn-secondary {
+                padding: 10px 24px;
+                background: transparent;
+                color: $text-muted;
+                border: 1px solid $border-color;
+                border-radius: $radius-sm;
+                cursor: pointer;
+                transition: 0.15s;
+                &:hover {
+                    background: $bg-hover;
+                    color: $text-primary;
+                }
+            }
+        }
+    }
+}

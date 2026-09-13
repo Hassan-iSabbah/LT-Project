@@ -1,0 +1,278 @@
+// ============================================================
+// HINDSIGHT FILTERS
+// ============================================================
+
+.hindsight-filters {
+    margin-bottom: 16px;
+    padding: 12px 16px;
+    background: $bg-surface;
+    border: 1px solid $border-color;
+    border-radius: $radius;
+    
+    .filter-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+        
+        .filter-group {
+            flex: 1;
+            min-width: 120px;
+            
+            &.search-group {
+                flex: 2;
+                min-width: 180px;
+            }
+            
+            input, select {
+                width: 100%;
+                padding: 6px 10px;
+                background: $bg-body;
+                color: $text-primary;
+                border: 1px solid $border-color;
+                border-radius: $radius-sm;
+                font-size: 0.8rem;
+                transition: 0.15s;
+                
+                &:focus {
+                    border-color: $color-work;
+                    outline: none;
+                    box-shadow: 0 0 0 3px rgba($color-work, 0.1);
+                }
+            }
+            
+            input::placeholder {
+                color: $text-muted;
+                opacity: 0.5;
+            }
+        }
+        
+        .custom-date-range {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            
+            input[type="date"] {
+                padding: 6px 10px;
+                background: $bg-body;
+                color: $text-primary;
+                border: 1px solid $border-color;
+                border-radius: $radius-sm;
+                font-size: 0.8rem;
+            }
+            
+            .custom-date-apply {
+                padding: 6px 14px;
+                background: $color-work;
+                color: #fff;
+                border: none;
+                border-radius: $radius-sm;
+                font-size: 0.75rem;
+                cursor: pointer;
+                transition: 0.15s;
+                
+                &:hover {
+                    background: lighten($color-work, 8%);
+                }
+            }
+        }
+        
+        .hindsight-reset-filters {
+            padding: 6px 14px;
+            background: $bg-body;
+            color: $text-muted;
+            border: 1px solid $border-color;
+            border-radius: $radius-sm;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: 0.15s;
+            white-space: nowrap;
+            
+            &:hover {
+                background: $bg-hover;
+                color: $text-primary;
+            }
+        }
+    }
+    
+    .filter-stats {
+        margin-top: 8px;
+        padding-top: 8px;
+        border-top: 1px solid $border-color;
+        font-size: 0.75rem;
+        color: $text-muted;
+        text-align: right;
+    }
+}
+
+// Recurring indicator on cards
+.hindsight-card .card-recurring {
+    font-size: 0.65rem;
+    opacity: 0.6;
+    margin-left: 4px;
+}
+
+// Responsive filters
+@media (max-width: 768px) {
+    .hindsight-filters .filter-row {
+        flex-direction: column;
+        align-items: stretch;
+        
+        .filter-group {
+            min-width: 0;
+            flex: 1 1 auto;
+            
+            &.search-group {
+                flex: 1 1 auto;
+            }
+        }
+        
+        .custom-date-range {
+            flex-wrap: wrap;
+            
+            input[type="date"] {
+                flex: 1;
+            }
+        }
+        
+        .hindsight-reset-filters {
+            width: 100%;
+            text-align: center;
+        }
+    }
+}
+
+// ============================================================
+// HINDSIGHT CARDS
+// ============================================================
+
+.hindsight-view {
+    padding: 16px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.hindsight-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.hindsight-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px;
+    background: $bg-surface;
+    border: 1px solid $border-color;
+    border-left: 5px solid $color-work;
+    border-radius: $radius;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    position: relative;
+
+    &:hover {
+        transform: translateY(-2px);
+        border-color: $text-muted;
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .card-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex: 1;
+        min-width: 0;
+
+        .card-status {
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .card-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: $text-primary;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .card-recurring {
+            font-size: 0.7rem;
+            opacity: 0.5;
+            flex-shrink: 0;
+        }
+
+        .card-venue {
+            font-size: 0.7rem;
+            color: $text-muted;
+            margin-left: 6px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 120px;
+        }
+    }
+
+    .card-right {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-shrink: 0;
+
+        .card-time {
+            font-size: 0.75rem;
+            color: $text-muted;
+        }
+
+        .card-date {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: $text-secondary;
+        }
+    }
+
+    // Glow states
+    &.glow-high {
+        box-shadow: 0 0 20px rgba($color-work, 0.15), inset 0 0 20px rgba($color-work, 0.04);
+        animation: pulse-glow-high 3s ease-in-out infinite;
+    }
+
+    &.glow-medium {
+        box-shadow: 0 0 12px rgba($color-family, 0.1), inset 0 0 12px rgba($color-family, 0.03);
+        animation: pulse-glow-medium 4s ease-in-out infinite;
+    }
+
+    &.glow-low {
+        box-shadow: 0 0 6px rgba($text-muted, 0.04);
+    }
+
+    // Status
+    &.completed {
+        .card-title {
+            opacity: 0.6;
+            text-decoration: line-through;
+        }
+    }
+
+    &.incomplete {
+        .card-title {
+            opacity: 1;
+        }
+    }
+}
+
+// ============================================================
+// GLOW ANIMATIONS
+// ============================================================
+
+@keyframes pulse-glow-high {
+    0%, 100% { box-shadow: 0 0 20px rgba($color-work, 0.15), inset 0 0 20px rgba($color-work, 0.04); }
+    50% { box-shadow: 0 0 35px rgba($color-work, 0.25), inset 0 0 35px rgba($color-work, 0.08); }
+}
+
+@keyframes pulse-glow-medium {
+    0%, 100% { box-shadow: 0 0 12px rgba($color-family, 0.1), inset 0 0 12px rgba($color-family, 0.03); }
+    50% { box-shadow: 0 0 22px rgba($color-family, 0.18), inset 0 0 22px rgba($color-family, 0.06); }
+}

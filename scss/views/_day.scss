@@ -1,0 +1,153 @@
+// /scss/_day.scss
+// ============================================================
+// DAY VIEW — 3 columns, 8 hours each, all events displayed
+// ============================================================
+
+.day-view {
+    .day-header {
+        text-align: center;
+        padding: 12px 0;
+        border-bottom: 2px solid $border-color;
+        background: $bg-surface-2;
+        
+        .day-name {
+            display: block;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: $text-primary;
+        }
+        
+        .day-date {
+            display: block;
+            font-size: 0.9rem;
+            color: $text-muted;
+        }
+    }
+    
+    .day-columns {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 0;
+        border: 1px solid $border-color;
+        border-radius: 0 0 $radius $radius;
+        overflow: hidden;
+        
+        .day-column {
+            border-right: 1px solid $border-color;
+            
+            &:last-child {
+                border-right: none;
+            }
+            
+            .column-label {
+                text-align: center;
+                padding: 6px 0;
+                font-size: 0.7rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                color: $text-muted;
+                background: $bg-surface;
+                border-bottom: 1px solid $border-color;
+            }
+            
+            .day-hour-row {
+                display: flex;
+                border-bottom: 1px solid $border-color;
+                min-height: 44px;
+                
+                &:hover {
+                    background: $bg-hover;
+                }
+                
+                .hour-label {
+                    width: 50px;
+                    flex-shrink: 0;
+                    padding: 2px 6px;
+                    font-size: 0.6rem;
+                    font-weight: 500;
+                    color: $text-muted;
+                    border-right: 1px solid $border-color;
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-end;
+                    padding-right: 8px;
+                }
+                
+                .hour-cell {
+                    flex: 1;
+                    padding: 2px 4px;
+                    min-height: 44px;
+                    display: flex;
+                    flex-wrap: wrap;
+                    align-items: center;
+                    gap: 2px;
+                    cursor: pointer;
+                    
+                    .empty-slot {
+                        color: $text-muted;
+                        font-size: 0.7rem;
+                        opacity: 0.3;
+                        transition: opacity 0.2s;
+                        .day-hour-row:hover & {
+                            opacity: 0.6;
+                        }
+                    }
+                    
+                    .event-pill {
+                        font-size: 0.65rem;
+                        padding: 2px 8px 2px 6px;
+                        
+                        .event-title {
+                            max-width: 70px;
+                            font-size: 0.65rem;
+                        }
+                        .event-venue {
+                            display: inline-block;
+                            font-size: 0.55rem;
+                            max-width: 40px;
+                            color: $text-muted;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        }
+                        .priority-badge {
+                            font-size: 0.5rem;
+                            padding: 0 4px;
+                        }
+                        .more-badge {
+                            font-size: 0.55rem;
+                            padding: 0 6px;
+                            line-height: 16px;
+                        }
+                        .cycle-arrow {
+                            font-size: 0.5rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Responsive: Day View
+@media (max-width: 768px) {
+    .day-view .day-columns {
+        grid-template-columns: 1fr 1fr;
+        
+        .day-column:last-child {
+            border-right: none;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .day-view .day-columns {
+        grid-template-columns: 1fr;
+        
+        .day-column {
+            border-right: none;
+            border-bottom: 1px solid $border-color;
+        }
+    }
+}

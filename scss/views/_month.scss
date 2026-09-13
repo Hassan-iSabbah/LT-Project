@@ -1,0 +1,191 @@
+// /scss/_month.scss
+// ============================================================
+// MONTH VIEW — 7-column grid, event indicators on each day
+// ============================================================
+
+.month-view {
+    .month-header {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        border-bottom: 2px solid $border-color;
+        background: $bg-surface-2;
+        padding: 8px 0;
+        
+        .month-day-label {
+            text-align: center;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: $text-muted;
+            padding: 4px 0;
+        }
+    }
+    
+    .month-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        border: 1px solid $border-color;
+        border-radius: 0 0 $radius $radius;
+        overflow: hidden;
+        
+        .month-day-cell {
+            min-height: 80px;
+            padding: 6px 4px;
+            border-right: 1px solid $border-color;
+            border-bottom: 1px solid $border-color;
+            background: $bg-surface;
+            cursor: pointer;
+            transition: background 0.15s;
+            
+            &:nth-child(7n) {
+                border-right: none;
+            }
+            
+            // Last row: remove bottom border
+            &:nth-last-child(-n+7) {
+                border-bottom: none;
+            }
+            
+            &:hover {
+                background: $bg-hover;
+            }
+            
+            &.other-month {
+                opacity: 0.3;
+                background: $bg-body;
+            }
+            
+            &.today {
+                background: rgba($color-work, 0.06);
+                border: 1px solid $color-work;
+                position: relative;
+                z-index: 1;
+                
+                .day-number {
+                    color: $color-work;
+                    font-weight: 700;
+                    text-shadow: 0 0 20px rgba($color-work, 0.15);
+                }
+            }
+            
+            .day-number {
+                display: block;
+                font-size: 0.85rem;
+                font-weight: 500;
+                color: $text-primary;
+                margin-bottom: 4px;
+            }
+            
+            .day-events {
+                display: flex;
+                flex-direction: column;
+                gap: 2px;
+                max-height: 56px;
+                overflow: hidden;
+                
+                .event-indicator {
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+                    padding: 1px 6px;
+                    border-radius: 4px;
+                    font-size: 0.55rem;
+                    font-weight: 500;
+                    color: $text-primary;
+                    background: rgba($color-work, 0.08);
+                    border-left: 2px solid $color-work;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    
+                    .indicator-title {
+                        flex: 1;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                    
+                    .indicator-count {
+                        flex-shrink: 0;
+                        font-size: 0.5rem;
+                        color: $text-muted;
+                        background: $bg-body;
+                        padding: 0 4px;
+                        border-radius: 8px;
+                    }
+                }
+                
+                .more-indicator {
+                    font-size: 0.55rem;
+                    color: $text-muted;
+                    text-align: center;
+                    padding: 1px 0;
+                    cursor: pointer;
+                    
+                    &:hover {
+                        color: $text-primary;
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Responsive: Month View
+@media (max-width: 768px) {
+    .month-view {
+        .month-day-cell {
+            min-height: 60px;
+            padding: 4px 2px;
+            
+            .day-number {
+                font-size: 0.7rem;
+            }
+            
+            .day-events .event-indicator {
+                font-size: 0.5rem;
+                padding: 0 4px;
+                .indicator-title {
+                    max-width: 30px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .month-view {
+        .month-header .month-day-label {
+            font-size: 0.55rem;
+        }
+        
+        .month-day-cell {
+            min-height: 44px;
+            padding: 2px 2px;
+            
+            .day-number {
+                font-size: 0.6rem;
+            }
+            
+            .day-events {
+                max-height: 28px;
+                
+                .event-indicator {
+                    font-size: 0.45rem;
+                    padding: 0 3px;
+                    .indicator-title {
+                        max-width: 18px;
+                    }
+                    .indicator-count {
+                        font-size: 0.4rem;
+                        padding: 0 3px;
+                    }
+                }
+                .more-indicator {
+                    font-size: 0.45rem;
+                }
+            }
+        }
+    }
+}
